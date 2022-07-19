@@ -11,7 +11,6 @@ pipeline {
                 userRemoteConfigs: [[url: 'https://github.com/starx46/kubernatesprojects.git']]])
                 script{
                     def remote = [:]
-                    remote.name = "friendly name"
                     remote.host = "172.31.88.95"                    
                     remote.user = 'root'
                     remote.password = 'root@123'
