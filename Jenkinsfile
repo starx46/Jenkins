@@ -4,17 +4,16 @@ remote.host = "172.31.24.178"
 remote.allowAnyHosts = true
 
 node {
-    withCredentials([usernamePassword(credentialsId: 'docker-build', passwordVariable: 'root@123', usernameVariable: 'root')]) {
+    withCredentials([sshUserPrivateKey(credentialsId: 'docker-build', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'root')]) {
         remote.user = userName
-        remote.password = password
-
+        remote.identityFile = identity
         stage("SSH Steps Rocks!") {
-            writeFile file: 'test.sh', text: 'ls'
+            writeFile file: 'abc.sh', text: 'ls'
             sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
-            sshScript remote: remote, script: 'test.sh'
-            sshPut remote: remote, from: 'test.sh', into: '.'
-            sshGet remote: remote, from: 'test.sh', into: 'test_new.sh', override: true
-            sshRemove remote: remote, path: 'test.sh'
+            sshPut remote: remote, from: 'abc.sh', into: '.'
+            sshGet remote: remote, from: 'abc.sh', into: 'bac.sh', override: true
+            sshScript remote: remote, script: 'abc.sh'
+            sshRemove remote: remote, path: 'abc.sh'
         }
     }
 }
