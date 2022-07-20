@@ -4,6 +4,12 @@ remote.host = "172.31.24.178"
 remote.allowAnyHosts = true
 
 node {
+    
+     stage('Checkout code') {
+        steps {
+            checkout scm
+        }
+    }
     withCredentials([sshUserPrivateKey(credentialsId: 'docker-build', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = userName
         remote.identityFile = identity
