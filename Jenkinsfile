@@ -5,10 +5,15 @@ remote.allowAnyHosts = true
 
 node {
     
-     stage('Checkout code') {
+     stage('Checkout external proj') {
         steps {
-            checkout scm
+            git branch: 'main',
+                url: 'https://github.com/starx46/kubernatesprojects.git'
+
+            sh "ls -lat"
         }
+    }
+    
     }
     withCredentials([sshUserPrivateKey(credentialsId: 'docker-build', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = userName
