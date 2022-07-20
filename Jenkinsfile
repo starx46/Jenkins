@@ -7,9 +7,7 @@ node {
     
     
         stage('checkout scm'){
-            steps{
-                git branch: 'main', credentialsId: 'git-jenkins', url: 'https://github.com/starx46/kubernatesprojects.git'
-            }
+            
         
         }
   
