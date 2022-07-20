@@ -1,28 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('SSH remote') {
             steps {
-              checkout([$class: 'GitSCM', 
-                branches: [[name: '*/main']],
-                doGenerateSubmoduleConfigurations: false,
-                extensions: [[$class: 'CleanCheckout']],
-                submoduleCfg: [], 
-                userRemoteConfigs: [[url: 'https://github.com/starx46/kubernatesprojects.git']]])
-                script{
-                    def remote = [:]
-                    remote.host = "172.31.88.95"                    
-                    remote.user = 'root'
-                    remote.password = 'root@123'
-                    remote.allowAnyHosts = true
-                    remote.identityFile = identity
-
-           
-                    sshCommand remote:remote, command: "ls -l"
-                    sshCommand remote:remote, command: 'ls -l'
-                    sshCommand remote:remote, command: 'pwd'
-                }
-          }
+                 script {
+                     def remote = [name: 'test', host: '172.31.88.95', user: 'root', password: "root@123', allowAnyHosts: true]
+                     sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+                 }
+            }
         }
     }
 }
