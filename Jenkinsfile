@@ -7,8 +7,7 @@ node {
     
      stage('Checkout external proj') {
         steps {
-            git branch: 'main',
-                url: 'https://github.com/starx46/kubernatesprojects.git'
+            git branch: 'main', credentialsId: 'git-jenkins', url: 'https://github.com/starx46/Jenkins'
 
             sh "ls -lat"
         }
