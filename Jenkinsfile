@@ -8,11 +8,11 @@ node {
         remote.user = userName
         remote.identityFile = identity
         stage("SSH Steps Rocks!") {
-            writeFile file: '/root/abc.sh', text: 'date'
+            writeFile file: 'abc.sh', text: 'date'
             sshCommand remote: remote, command: 'hostname -i'
-            sshPut remote: remote, from: '/root/abc.sh', into: '.'
-            sshGet remote: remote, from: '/root/abc.sh', into: 'bac.sh', override: true
-            sshScript remote: remote, script: '/rootabc.sh'
+            sshPut remote: remote, from: 'abc.sh', into: '.'
+            sshGet remote: remote, from: 'abc.sh', into: 'bac.sh', override: true
+            sshScript remote: remote, script: 'abc.sh'
             sshRemove remote: remote, path: 'abc.sh'
         }
     }
