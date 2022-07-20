@@ -1,16 +1,17 @@
-def remote = [:]
-remote.name = "node"
-remote.host = "172.31.24.178"
-remote.allowAnyHosts = true
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+              checkout([$class: 'GitSCM', 
+                branches: [[name: '*/main']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'CleanCheckout']],
+                submoduleCfg: [], 
+                userRemoteConfigs: [[url: 'https://github.com/starx46/kubernatesprojects.git']]])
+                sshCommand remote:remote, command: "ls -l"
 
-node {
-    withCredentials([usernamePassword(credentialsId: 'sshUserAcct', passwordVariable: 'password', usernameVariable: 'userName')]) {
-        remote.user = root
-        remote.password = root@123
-
-        stage("SSH Steps Rocks!") {
-            sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
-           
+          }
         }
     }
 }
