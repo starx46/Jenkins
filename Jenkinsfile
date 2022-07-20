@@ -4,7 +4,7 @@ remote.host = "172.31.24.178"
 remote.allowAnyHosts = true
 
 node {
-    withCredentials([usernamePassword(credentialsId: 'docker-build', passwordVariable: 'password', usernameVariable: 'root')]) {
+    withCredentials([usernamePassword(credentialsId: 'docker-build', passwordVariable: 'root@123', usernameVariable: 'root')]) {
         remote.user = userName
         remote.password = password
 
