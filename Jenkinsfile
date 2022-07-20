@@ -1,9 +1,11 @@
 pipeline {
     agent any
     stages {
-        parameters {
+        stage{
+             parameters {
                  choice choices: ['production'], name: 'branch'
                         }
+        }
         stage('Example Build') {
             steps {
                 echo 'Hello World'
