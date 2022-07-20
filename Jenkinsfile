@@ -4,8 +4,8 @@ remote.host = "172.31.24.178"
 remote.allowAnyHosts = true
 
 node {
-    withCredentials([sshUserPrivateKey(credentialsId: 'docker-build', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'root')]) {
-        remote.user = userName
+    withCredentials([sshUserPrivateKey(credentialsId: 'docker-build', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+        remote.user = root
         remote.identityFile = identity
         stage("SSH Steps Rocks!") {
             writeFile file: 'abc.sh', text: 'ls'
