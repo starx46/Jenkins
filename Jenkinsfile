@@ -7,11 +7,16 @@ node {
     
     
         stage('checkout scm'){
+           url: 'https://github.com/starx46/Jenkins.git'
+           sh 'ls -ltrh' 
+        
+        }
+    
+   stage('checkout scm'){
            url: 'https://github.com/starx46/kubernatesprojects.git'
            sh 'ls -ltrh' 
         
         }
-  
     
     withCredentials([sshUserPrivateKey(credentialsId: 'docker-build', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = userName
